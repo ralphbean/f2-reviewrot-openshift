@@ -10,7 +10,7 @@ destroy:
 	oc delete {bc,dc,is}/$(IMAGE_NAME)
 
 create:
-	oc new-app https://code.engineering.redhat.com/gerrit/p/rhchi.git \
+	oc new-app https://github.com/ralphbean/f2-reviewrot-openshift \
 		--context-dir=frontend \
 		--strategy=docker \
 		--name $(IMAGE_NAME)
