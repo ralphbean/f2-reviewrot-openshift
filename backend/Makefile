@@ -20,3 +20,7 @@ create:
 	oc volume dc/$(IMAGE_NAME) --add \
 		--name=json-data \
 		--mount-path=/opt/data
+	oc volume dc/$(IMAGE_NAME) --add \
+		--type secret \
+		--secret-name reviewrot-config \
+		--mount-path=/opt/
