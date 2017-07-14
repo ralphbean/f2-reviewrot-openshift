@@ -10,6 +10,7 @@ RUN git clone https://github.com/nirzari/review-rot && \
     rm -rf /usr/share/nginx/html/* && \
     ln -s $(pwd)/review-rot/web/* /usr/share/nginx/html/. && \
     rm /usr/share/nginx/html/js/default-data.json && \
-    ln -s /opt/data/data.json /usr/share/nginx/html/js/default-data.json
+    ln -s /opt/data/data.json /usr/share/nginx/html/js/default-data.json && \
+    sed -i 's/https:\/\/raw.githubusercontent.*\/default/default/' /usr/share/nginx/html/js/site.js
 EXPOSE 8080
 USER 997
