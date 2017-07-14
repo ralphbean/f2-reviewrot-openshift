@@ -18,6 +18,8 @@ create:
 		--strategy=docker \
 		--name $(IMAGE_NAME)
 	oc volume dc/$(IMAGE_NAME) --add \
+		--type=pvc \
+		--claim-name=json-data \
 		--name=json-data \
 		--mount-path=/opt/data
 	oc volume dc/$(IMAGE_NAME) --add \
