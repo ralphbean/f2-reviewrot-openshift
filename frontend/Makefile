@@ -7,7 +7,7 @@ deploy:
 	oc start-build $(IMAGE_NAME)
 
 destroy:
-	oc delete {bc,dc,is}/$(IMAGE_NAME)
+	oc delete {bc,dc,is,services}/$(IMAGE_NAME) is/nonroot-nginx
 
 create:
 	oc new-app https://github.com/ralphbean/f2-reviewrot-openshift \
