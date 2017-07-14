@@ -13,3 +13,6 @@ destroy:
 create:
 	$(MAKE) create -C backend
 	$(MAKE) create -C frontend
+
+watch:
+	watch oc status
