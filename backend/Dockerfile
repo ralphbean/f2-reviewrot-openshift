@@ -8,4 +8,4 @@ RUN yum -y install git python-setuptools && yum -y clean all && \
     cd review-rot && \
     python setup.py install
 USER 1001
-ENTRYPOINT while true; do review-rot -c /opt/configuration.yaml -f json > /opt/data/data.json; sleep 600; done
+ENTRYPOINT while true; do review-rot -c /opt/configuration.yaml -f json --reverse > /opt/data/data.json; sleep 600; done
