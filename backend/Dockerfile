@@ -10,7 +10,7 @@ RUN yum -y install git python-setuptools && yum -y clean all && \
 USER 1001
 ENTRYPOINT while true; do \
     date \
-    && review-rot -c /opt/configuration.yaml -f json --reverse > /opt/data/data-pending.json \
+    && review-rot -c /secret/configuration.yaml -f json --reverse > /opt/data/data-pending.json \
     && mv /opt/data/data-pending.json /opt/data/data.json \
     && sleep 600; \
 done
