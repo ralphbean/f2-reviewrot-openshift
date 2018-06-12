@@ -11,4 +11,5 @@ Edit the hidden secrets/configuration.yaml file to your heart's content, and the
 ```bash
 oc delete secrets/reviewrot-config
 oc secret new reviewrot-config ./secret/configuration.yaml
+oc rollout latest dc/f2-reviewrot-backend
 ```
