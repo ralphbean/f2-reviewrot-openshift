@@ -1,0 +1,45 @@
+git_services:
+  - type: github
+    host: github.com
+    token: ENV.GITHUB_TOKEN
+    repos:
+    - nirzari/review-rot
+    - fedora-modularity/product-definition-center
+    - fedora-infra/pdc-updater
+    - fedora-infra/datanommer
+    - fedora-infra/datagrepper
+    #- fedora-infra/fmn
+    - release-engineering/estuary
+    - release-engineering/estuary-api
+    - release-engineering/estuary-updater
+    - release-engineering/resultsdb-updater
+    - release-engineering/fedmsg_meta_umb
+    - release-engineering/mbs-messaging-umb
+      #- product-definition-center/pdc-tangle
+      #- product-definition-center/pdc-tangle-web
+    - ralphbean/finishline
+    - accorvin/jira-mosaic
+    - mokshaproject/moksha
+  - type: pagure
+    host: pagure.io
+    repos:
+    - fm-orchestrator
+    - waiverdb
+    - greenwave
+    - freshmaker
+    - odcs
+    - modulemd
+    - sync-to-jira
+    - set-jira-paf
+    - fedrepo_req
+  - type: gitlab
+    host: https://gitlab.cee.redhat.com
+    token: ENV.GITLAB_TOKEN
+    repos:
+    - devops/botas
+    - devops/botas-cache
+    - devops/factory2-openshift-templates
+    - devops/factory2-best-practices
+    - devops/ursa-major
+    - devops/release-driver
+    - rcm/container-image-groups
