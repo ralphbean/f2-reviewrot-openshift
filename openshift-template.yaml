@@ -1,0 +1,276 @@
+apiVersion: v1
+kind: Template
+metadata:
+  name: f2-reviewrot-template
+  labels:
+    app: f2-reviewrot
+parameters:
+  - name: BACKEND_IMAGE
+    value: 172.30.1.1:5000/f2-reviewrot/f2-reviewrot-backend:latest
+  - name: FRONTEND_HOSTNAME
+    required: true
+objects:
+  - apiVersion: v1
+    kind: BuildConfig
+    metadata:
+      name: f2-reviewrot-frontend
+      labels:
+        app: f2-reviewrot
+    spec:
+      output:
+        to:
+          kind: ImageStreamTag
+          name: f2-reviewrot-frontend:latest
+      runPolicy: Serial
+      source:
+        type: Git
+        contextDir: frontend
+        git:
+          uri: https://github.com/accorvin/f2-reviewrot-openshift
+          ref: openshift-refactor
+      strategy:
+        type: Docker
+        dockerStrategy:
+          from:
+            kind: ImageStreamTag
+            name: nonroot-nginx:latest
+      triggers:
+        - github:
+            secretReference:
+              name: f2-reviewrot-frontend
+          type: GitHub
+        - type: ConfigChange
+        - imageChange:
+          type: ImageChange
+
+  - apiVersion: v1
+    kind: BuildConfig
+    metadata:
+      name: f2-reviewrot-backend
+      labels:
+        app: f2-reviewrot
+    spec:
+      output:
+        to:
+          kind: ImageStreamTag
+          name: f2-reviewrot-backend:latest
+      runPolicy: Serial
+      source:
+        type: Git
+        contextDir: backend
+        git:
+          uri: https://github.com/accorvin/f2-reviewrot-openshift
+          ref: openshift-refactor
+      strategy:
+        type: Docker
+        dockerStrategy:
+          from:
+            kind: ImageStreamTag
+            name: centos:7
+      triggers:
+        - github:
+            secretReference:
+              name: f2-reviewrot-backend
+          type: GitHub
+        - type: ConfigChange
+        - imageChange:
+          type: ImageChange
+
+  - apiVersion: v1
+    kind: ImageStream
+    metadata:
+      name: nonroot-nginx
+      labels:
+        app: f2-reviewrot
+    spec:
+      dockerImageRepository: ""
+      tags:
+        - from:
+            kind: DockerImage
+            name: tomaskral/nonroot-nginx
+          name: latest
+
+  - apiVersion: v1
+    kind: ImageStream
+    metadata:
+      name: centos
+      labels:
+        app: f2-reviewrot
+    spec:
+      dockerImageRepository: ""
+      tags:
+        - from:
+            kind: DockerImage
+            name: centos:7
+          name: "7"
+
+  - apiVersion: v1
+    kind: ImageStream
+    metadata:
+      name: f2-reviewrot-frontend
+      labels:
+        app: f2-reviewrot
+    spec:
+      dockerImageRepository: ""
+      tags:
+        - name: latest
+
+  - apiVersion: v1
+    kind: ImageStream
+    metadata:
+      name: f2-reviewrot-backend
+      labels:
+        app: f2-reviewrot
+    spec:
+      dockerImageRepository: ""
+      tags:
+        - name: latest
+
+  - apiVersion: batch/v2alpha1
+    kind: CronJob
+    metadata:
+      name: f2-reviewrot-backend
+      labels:
+        app: f2-reviewrot
+    spec:
+      successfulJobsHistoryLimit: 2
+      failedJobsHistoryLimit: 2
+      schedule: "0/5 * * * *"
+      jobTemplate:
+        spec:
+          template:
+            metadata:
+              labels:
+                parent: "cronjobreviewrot"
+            spec:
+              containers:
+                - name: f2-reviewrot-backend
+                  image: ${BACKEND_IMAGE}
+                  imagePullPolicy: Always
+                  env:
+                    - name: GITHUB_TOKEN
+                      valueFrom:
+                        secretKeyRef:
+                          name: f2-reviewrot-backend
+                          key: github-token
+                    - name: GITLAB_TOKEN
+                      valueFrom:
+                        secretKeyRef:
+                          name: f2-reviewrot-backend
+                          key: gitlab-token
+                  volumeMounts:
+                    - name: f2-reviewrot-data
+                      mountPath: /opt/data
+                    - name: f2-reviewrot-config
+                      mountPath: /secret
+              restartPolicy: Never
+              volumes:
+                - name: f2-reviewrot-data
+                  persistentVolumeClaim:
+                    claimName: f2-reviewrot-data
+                - name: f2-reviewrot-config
+                  configMap:
+                    name: f2-reviewrot-config
+          triggers:
+            - type: ConfigChange
+            - type: ImageChange
+              imageChangeParams:
+                automatic: true
+                containerNames:
+                  - f2-reviewrot-backend
+                from:
+                  kind: ImageStreamTag
+                  name: f2-reviewrot-backend:latest
+
+  - apiVersion: v1
+    kind: DeploymentConfig
+    metadata:
+      name: f2-reviewrot-frontend
+      labels:
+        app: f2-reviewrot
+    spec:
+      replicas: 1
+      selector:
+        deploymentConfig: f2-reviewrot-frontend
+      strategy:
+        type: Rolling
+        rollingParams:
+          intervalSeconds: 1
+          maxSurge: 25%
+          maxUnavailable: 25%
+          timeoutSeconds: 600
+          updatePeriodSeconds: 1
+      template:
+        metadata:
+          labels:
+            deploymentConfig: f2-reviewrot-frontend
+            app: f2-reviewrot
+        spec:
+          containers:
+            - name: f2-reviewrot-frontend
+              image: f2-reviewrot-frontend
+              imagePullPolicy: Always
+              ports:
+                - containerPort: 8080
+                  protocol: TCP
+              resources: {}
+              volumeMounts:
+                - name: f2-reviewrot-data
+                  mountPath: /opt/data
+          restartPolicy: Always
+          volumes:
+            - name: f2-reviewrot-data
+              persistentVolumeClaim:
+                claimName: f2-reviewrot-data
+      triggers:
+        - type: ConfigChange
+        - type: ImageChange
+          imageChangeParams:
+            automatic: true
+            containerNames:
+              - f2-reviewrot-frontend
+            from:
+              kind: ImageStreamTag
+              name: f2-reviewrot-frontend:latest
+
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: f2-reviewrot-frontend
+      labels:
+        app: f2-reviewrot
+    spec:
+      selector:
+        deploymentConfig: f2-reviewrot-frontend
+      ports:
+        - name: web
+          port: 80
+          protocol: TCP
+          targetPort: 8080
+
+  - apiVersion: v1
+    kind: Route
+    metadata:
+      name: f2-reviewrot-frontend
+      labels:
+        app: f2-reviewrot
+    spec:
+      host: ${FRONTEND_HOSTNAME}
+      port:
+        targetPort: web
+      to:
+        kind: Service
+        name: f2-reviewrot-frontend
+
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: f2-reviewrot-data
+      labels:
+        app: f2-reviewrot
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: "1Gi"
