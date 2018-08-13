@@ -40,8 +40,19 @@ oc create -f openshift-template.yaml
 Specify the argument for the hostname to be used to access the frontend UI.
 
 ```
-oc process f2-reviewrot-template -p FRONTEND_HOSTNAME=${FRONTEND_HOSTNAME} | \
+oc process f2-reviewrot-template -p FRONTEND_HOSTNAME=${FRONTEND_HOSTNAME} \
+-p BACKEND_IMAGE=${BACKEND_IMAGE} | \
 oc apply -f -
+```
+
+In the case of the internal Factory 2.0 deployment on the open pass platform,
+the full command is:
+
+```
+oc process f2-reviewrot-template \
+-p FRONTEND_HOSTNAME=reviews-f2-reviewrot.int.open.paas.redhat.com \
+-p BACKEND_IMAGE=docker-registry.default.svc:5000/f2-reviewrot/f2-reviewrot-backend \
+| oc apply -f -
 ```
 
 # Steps for updating the project

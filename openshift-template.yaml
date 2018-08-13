@@ -6,7 +6,7 @@ metadata:
     app: f2-reviewrot
 parameters:
   - name: BACKEND_IMAGE
-    value: 172.30.1.1:5000/f2-reviewrot/f2-reviewrot-backend:latest
+    required: true
   - name: FRONTEND_HOSTNAME
     required: true
 objects:
@@ -26,8 +26,8 @@ objects:
         type: Git
         contextDir: frontend
         git:
-          uri: https://github.com/accorvin/f2-reviewrot-openshift
-          ref: openshift-refactor
+          uri: https://github.com/ralphbean/f2-reviewrot-openshift
+          ref: master
       strategy:
         type: Docker
         dockerStrategy:
@@ -59,8 +59,8 @@ objects:
         type: Git
         contextDir: backend
         git:
-          uri: https://github.com/accorvin/f2-reviewrot-openshift
-          ref: openshift-refactor
+          uri: https://github.com/ralphbean/f2-reviewrot-openshift
+          ref: master
       strategy:
         type: Docker
         dockerStrategy:
