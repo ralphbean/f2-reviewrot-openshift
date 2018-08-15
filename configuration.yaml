@@ -18,6 +18,7 @@ git_services:
       #- product-definition-center/pdc-tangle
       #- product-definition-center/pdc-tangle-web
     - ralphbean/finishline
+    - ralphbean/f2-reviewrot-openshift
     - accorvin/jira-mosaic
     - mokshaproject/moksha
   - type: pagure
@@ -42,4 +43,7 @@ git_services:
     - devops/factory2-best-practices
     - devops/ursa-major
     - devops/release-driver
+    - devops/umb-openshift
+    - devops/penumbra
+    - devops/factory2-jobs
     - rcm/container-image-groups
