@@ -33,6 +33,7 @@ git_services:
     - sync-to-jira
     - set-jira-paf
     - fedrepo_req
+    - module_diff
   - type: gitlab
     host: https://gitlab.cee.redhat.com
     token: ENV.GITLAB_TOKEN
