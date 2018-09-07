@@ -35,6 +35,7 @@ git_services:
     - set-jira-paf
     - fedrepo_req
     - module_diff
+    - fedora-ci/messages
   - type: gitlab
     host: https://gitlab.cee.redhat.com
     token: ENV.GITLAB_TOKEN
