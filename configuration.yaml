@@ -36,6 +36,7 @@ git_services:
     - fedrepo_req
     - module_diff
     - fedora-ci/messages
+    - taskotron/resultsdb
   - type: gitlab
     host: https://gitlab.cee.redhat.com
     token: ENV.GITLAB_TOKEN
