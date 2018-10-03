@@ -163,7 +163,7 @@ objects:
                       mountPath: /opt/data
                     - name: f2-reviewrot-config
                       mountPath: /secret
-              restartPolicy: Never
+              restartPolicy: OnFailure
               volumes:
                 - name: f2-reviewrot-data
                   persistentVolumeClaim:
