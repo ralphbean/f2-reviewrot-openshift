@@ -45,12 +45,12 @@ oc process f2-reviewrot-template -p FRONTEND_HOSTNAME=${FRONTEND_HOSTNAME} \
 oc apply -f -
 ```
 
-In the case of the internal Factory 2.0 deployment on the open pass platform,
+In the case of the internal Factory 2.0 deployment on the Upshift platform,
 the full command is:
 
 ```
 oc process f2-reviewrot-template \
--p FRONTEND_HOSTNAME=reviews-f2-reviewrot.int.open.paas.redhat.com \
+-p FRONTEND_HOSTNAME=f2-reviews.cloud.paas.upshift.redhat.com \
 -p BACKEND_IMAGE=docker-registry.default.svc:5000/f2-reviewrot/f2-reviewrot-backend \
 | oc apply -f -
 ```
@@ -87,5 +87,14 @@ oc delete template/f2-reviewrot-template
 Then recreate it with the new version
 
 ```
-oc process f2-reviewrot-template | oc apply -f -
+oc create -f openshift-template.yaml
+```
+
+And finally, process the template
+
+```
+oc process f2-reviewrot-template \
+-p FRONTEND_HOSTNAME=f2-reviews.cloud.paas.upshift.redhat.com \
+-p BACKEND_IMAGE=docker-registry.default.svc:5000/f2-reviewrot/f2-reviewrot-backend \
+| oc apply -f -
 ```
