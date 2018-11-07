@@ -34,6 +34,7 @@ objects:
           from:
             kind: ImageStreamTag
             name: nonroot-nginx:latest
+          noCache: true
       triggers:
         - github:
             secretReference:
@@ -67,6 +68,7 @@ objects:
           from:
             kind: ImageStreamTag
             name: centos:7
+          noCache: true
       triggers:
         - github:
             secretReference:
