@@ -45,6 +45,7 @@ git_services:
     - devops/botas-cache
     - devops/factory2-openshift-templates
     - devops/factory2-best-practices
+    - devops/factory2-segment-tests
     - devops/ursa-major
     - devops/release-driver
     - devops/umb-openshift
