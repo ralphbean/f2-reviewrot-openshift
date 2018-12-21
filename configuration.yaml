@@ -9,6 +9,7 @@ git_services:
     - fedora-infra/datanommer
     - fedora-infra/datagrepper
     #- fedora-infra/fmn
+    - fedora-modularity/message-tagging-service
     - release-engineering/estuary
     - release-engineering/estuary-api
     - release-engineering/estuary-updater
