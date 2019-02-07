@@ -8,7 +8,6 @@ git_services:
     - fedora-infra/pdc-updater
     - fedora-infra/datanommer
     - fedora-infra/datagrepper
-    #- fedora-infra/fmn
     - fedora-modularity/message-tagging-service
     - release-engineering/estuary
     - release-engineering/estuary-api
@@ -16,9 +15,6 @@ git_services:
     - release-engineering/resultsdb-updater
     - release-engineering/fedmsg_meta_umb
     - release-engineering/mbs-messaging-umb
-    # - release-engineering/assayist
-      #- product-definition-center/pdc-tangle
-      #- product-definition-center/pdc-tangle-web
     - ralphbean/finishline
     - ralphbean/f2-reviewrot-openshift
     - accorvin/jira-mosaic
@@ -37,7 +33,6 @@ git_services:
     - fedrepo_req
     - module_diff
     - fedora-ci/messages
-    - taskotron/resultsdb
   - type: gitlab
     host: https://gitlab.cee.redhat.com
     token: ENV.GITLAB_TOKEN
