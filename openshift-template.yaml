@@ -138,6 +138,7 @@ objects:
       successfulJobsHistoryLimit: 2
       failedJobsHistoryLimit: 2
       schedule: "0/10 * * * *"
+      concurrencyPolicy: Forbid
       jobTemplate:
         spec:
           template:
