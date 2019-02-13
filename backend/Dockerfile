@@ -9,7 +9,8 @@ RUN yum -y install git epel-release && \
     git clone https://github.com/nirzari/review-rot && \
     cd review-rot && \
     python setup.py install
+# This will allow a non-root user to install a custom root CA at run-time
+RUN chmod 777 /etc/pki/tls/certs/ca-bundle.crt
+COPY run.sh /src/
 USER 1001
-ENTRYPOINT date \
-           && review-rot -c /secret/configuration.yaml -f json --reverse > /opt/data/data-pending.json \
-           && mv /opt/data/data-pending.json /opt/data/data.json;
+ENTRYPOINT ["/src/run.sh"]
