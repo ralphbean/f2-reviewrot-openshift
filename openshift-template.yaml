@@ -139,6 +139,12 @@ objects:
       failedJobsHistoryLimit: 2
       schedule: "0/10 * * * *"
       concurrencyPolicy: Forbid
+      # When the concurrencyPolicy is set to Forbid, and something
+      # prevents the Pod from running, Kubernetes may stop attempting
+      # to schedule it altogether. Increase startingDeadlineSeconds to
+      # to allow manual intervention:
+      # https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#cron-job-limitations
+      startingDeadlineSeconds: 864000  # 10 days
       jobTemplate:
         spec:
           template:
