@@ -6,7 +6,7 @@ LABEL \
 
 USER 0
 RUN yum -y install git && yum -y clean all
-RUN git clone https://github.com/nirzari/review-rot && \
+RUN git clone https://github.com/redhat-aqe/review-rot && \
     rm -rf /usr/share/nginx/html/* && \
     ln -s $(pwd)/review-rot/web/* /usr/share/nginx/html/. && \
     rm /usr/share/nginx/html/js/default-data.json && \
