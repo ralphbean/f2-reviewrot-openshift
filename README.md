@@ -1,6 +1,6 @@
 An openshift deployment of review-rot
 
-https://github.com/nirzari/review-rot/pull/44
+https://github.com/redhat-aqe/review-rot/pull/44
 
 ---
 

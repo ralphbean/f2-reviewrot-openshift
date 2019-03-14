@@ -3,7 +3,7 @@ git_services:
     host: github.com
     token: ENV.GITHUB_TOKEN
     repos:
-    - nirzari/review-rot
+    - redhat-aqe/review-rot
     - fedora-modularity/product-definition-center
     - fedora-infra/pdc-updater
     - fedora-infra/datanommer
