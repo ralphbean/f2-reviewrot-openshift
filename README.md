@@ -50,7 +50,7 @@ the full command is:
 
 ```
 oc process f2-reviewrot-template \
--p FRONTEND_HOSTNAME=f2-reviews.cloud.paas.upshift.redhat.com \
+-p FRONTEND_HOSTNAME=f2-reviews.cloud.paas.psi.redhat.com \
 -p BACKEND_IMAGE=docker-registry.default.svc:5000/f2-reviewrot/f2-reviewrot-backend \
 | oc apply -f -
 ```
@@ -94,7 +94,7 @@ And finally, process the template
 
 ```
 oc process f2-reviewrot-template \
--p FRONTEND_HOSTNAME=f2-reviews.cloud.paas.upshift.redhat.com \
+-p FRONTEND_HOSTNAME=f2-reviews.cloud.paas.psi.redhat.com \
 -p BACKEND_IMAGE=docker-registry.default.svc:5000/f2-reviewrot/f2-reviewrot-backend \
 | oc apply -f -
 ```
