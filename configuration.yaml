@@ -48,3 +48,17 @@ git_services:
     - devops/penumbra
     - devops/factory2-jobs
     - rcm/container-image-groups
+  - type: gitlab
+    host: https://gitlab.infra.prod.eng.rdu2.redhat.com
+    token: ENV.GITLAB_SYSOPS_TOKEN
+    repos:
+    - ansible-playbooks/freshmaker-playbooks
+    - ansible-playbooks/mts-playbooks
+    - ansible-playbooks/factory2-jobs-playbooks
+    - ansible-playbooks/factory2-prometheus-playbooks
+    - ansible-playbooks/greenwave-playbooks
+    - ansible-playbooks/odcs-playbooks
+    - ansible-playbooks/umb-irc-playbooks
+    - ansible-playbooks/waiverdb-playbooks
+    - ansible-playbooks/estuary-playbooks
+    - ansible-playbooks/mbs-playbooks
