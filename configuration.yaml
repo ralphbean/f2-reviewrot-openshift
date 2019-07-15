@@ -47,6 +47,7 @@ git_services:
     - devops/umb-openshift
     - devops/penumbra
     - devops/factory2-jobs
+    - devops/stream-branching-tool
     - rcm/container-image-groups
   - type: gitlab
     host: https://gitlab.infra.prod.eng.rdu2.redhat.com
