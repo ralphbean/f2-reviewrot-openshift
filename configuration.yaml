@@ -3,69 +3,69 @@ git_services:
     host: github.com
     token: ENV.GITHUB_TOKEN
     repos:
-    - redhat-aqe/review-rot
-    - fedora-modularity/product-definition-center
-    - fedora-infra/pdc-updater
-    - fedora-infra/datanommer
+    - accorvin/jira-mosaic
     - fedora-infra/datagrepper
+    - fedora-infra/datanommer
+    - fedora-infra/pdc-updater
     - fedora-modularity/message-tagging-service
+    - fedora-modularity/product-definition-center
+    - mokshaproject/moksha
+    - ralphbean/f2-reviewrot-openshift
+    - ralphbean/finishline
+    - redhat-aqe/review-rot
     - release-engineering/estuary
     - release-engineering/estuary-api
     - release-engineering/estuary-updater
-    - release-engineering/resultsdb-updater
     - release-engineering/fedmsg_meta_umb
     - release-engineering/mbs-messaging-umb
-    - ralphbean/finishline
-    - ralphbean/f2-reviewrot-openshift
-    - accorvin/jira-mosaic
-    - mokshaproject/moksha
+    - release-engineering/resultsdb-updater
   - type: pagure
     host: pagure.io
     repos:
-    - fm-orchestrator
-    - waiverdb
-    - greenwave
-    - freshmaker
-    - odcs
-    - modulemd
-    - sync-to-jira
-    - set-jira-paf
-    - fedrepo_req
-    - module_diff
     - fedora-ci/messages
+    - fedrepo_req
+    - fm-orchestrator
+    - freshmaker
+    - greenwave
+    - module_diff
+    - modulemd
+    - odcs
+    - set-jira-paf
+    - sync-to-jira
+    - waiverdb
   - type: gitlab
     host: https://gitlab.cee.redhat.com
     token: ENV.GITLAB_TOKEN
     repos:
-    - devops/botas
-    - devops/botas-cache
-    - devops/factory2-openshift-templates
-    - devops/factory2-best-practices
-    - devops/factory2-segment-tests
-    - devops/ursa-major
-    - devops/release-driver
-    - devops/umb-openshift
-    - devops/penumbra
-    - devops/factory2-jobs
-    - devops/stream-branching-tool
-    - rcm/container-image-groups
-    - ansible-playbooks/freshmaker-playbooks
-    - ansible-playbooks/mts-playbooks
-    - ansible-playbooks/factory2-jobs-playbooks
-    - ansible-playbooks/factory2-prometheus-playbooks
-    - ansible-playbooks/greenwave-playbooks
-    - ansible-playbooks/odcs-playbooks
-    - ansible-playbooks/umb-irc-playbooks
-    - ansible-playbooks/waiverdb-playbooks
-    - ansible-playbooks/mbs-playbooks
     - ansible-playbooks/cachito-playbooks
     - ansible-playbooks/datagrepper-playbooks
     - ansible-playbooks/estuary-playbooks
+    - ansible-playbooks/factory2-jobs-playbooks
+    - ansible-playbooks/factory2-prometheus-playbooks
+    - ansible-playbooks/freshmaker-playbooks
+    - ansible-playbooks/greenwave-playbooks
+    - ansible-playbooks/mbs-playbooks
+    - ansible-playbooks/mts-playbooks
+    - ansible-playbooks/odcs-playbooks
     - ansible-playbooks/resultsdb-playbooks
     - ansible-playbooks/resultsdb-updater-playbooks
+    - ansible-playbooks/umb-irc-playbooks
+    - ansible-playbooks/waiverdb-playbooks
     - ansible-roles/mbs
     - ansible-roles/mbs-frontend
     - ansible-roles/odcs
     - ansible-roles/resultsdb
     - ansible-roles/resultsdb-frontend
     - ansible-roles/resultsdb-updater
+    - devops/botas
+    - devops/botas-cache
+    - devops/factory2-best-practices
+    - devops/factory2-jobs
+    - devops/factory2-openshift-templates
+    - devops/factory2-segment-tests
+    - devops/penumbra
+    - devops/release-driver
+    - devops/stream-branching-tool
+    - devops/umb-openshift
+    - devops/ursa-major
+    - rcm/container-image-groups
