@@ -57,5 +57,15 @@ git_services:
     - ansible-playbooks/odcs-playbooks
     - ansible-playbooks/umb-irc-playbooks
     - ansible-playbooks/waiverdb-playbooks
-    - ansible-playbooks/estuary-playbooks
     - ansible-playbooks/mbs-playbooks
+    - ansible-playbooks/cachito-playbooks
+    - ansible-playbooks/datagrepper-playbooks
+    - ansible-playbooks/estuary-playbooks
+    - ansible-playbooks/resultsdb-playbooks
+    - ansible-playbooks/resultsdb-updater-playbooks
+    - ansible-roles/mbs
+    - ansible-roles/mbs-frontend
+    - ansible-roles/odcs
+    - ansible-roles/resultsdb
+    - ansible-roles/resultsdb-frontend
+    - ansible-roles/resultsdb-updater
